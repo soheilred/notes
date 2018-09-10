@@ -1,0 +1,65 @@
+\documentclass{article}
+%\documentclass{IEEETran}
+
+%\usepackage{anysize}
+%\usepackage[left=1.9cm,right=1.9cm,top=2.54cm,bottom=1.9cm]{geometry}
+%\usepackage{sectsty}
+%\sectionfont{\normalsize \bf}
+%\subsectionfont{\normalsize \bf}
+
+%\IEEEoverridecommandlockouts  
+%\overrideIEEEmargins
+
+%\usepackage{siunitx}
+\usepackage{setspace} 
+%\doublespacing
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\theoremstyle{remark}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{remark}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{property}{Property}
+\theoremstyle{remark}
+\newtheorem{definition}{Definition}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[bottom]{footmisc}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{enumerate}
+%===================================
+
+\title{ Optimal Control of An Invasive Plant in n-D Action Space}
+
+\makeatletter
+\let\@fnsymbol\@arabic
+\makeatother
+\author{Soheil}
+\date{}
+\begin{document}
+\maketitle
+\section{Problem Definition}
+In this research we study the optimal control of Glossy Buckthorn, an invasive plant in the area of New England. The mathematical equation that governs the problem is driven based upon the plant's growing cycle, from when they are seeds to when their fruits are being eaten by other animals, such as birds and rats, and their seeds, again, are being spread to miles away by these animals.
+
+We are trying to solve this problem as a Markov Decision Process. Since, in the first step, we are finding the most basic solution to the problem, we consider the states, actions, rewards, and transition probabilities in its most simplified shape, as follows;
+\begin{itemize}
+ \item States: The number of the plant in the whole region, the number of week in a year, the number of other important plans that we might be interested to consider (or possible be affected by the efforts of controlling our plant).
+ 
+ \item Actions: Not taking action, using pesticide, cutting the plant, growing native competitor plants
+ \item Transition Probabilities:
+ \item Rewards: The total net profit of all farmers
+\end{itemize}
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{invasive_species}
+\end{document}
