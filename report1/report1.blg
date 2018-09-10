@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: report1.aux
+The style file: plain.bst
+Database file #1: invasive_species.bib
+Warning--empty year in doi:10.1111
+You've used 6 entries,
+            2118 wiz_defined-function locations,
+            541 strings with 5362 characters,
+and the built_in function-call counts, 2441 in all, are:
+= -- 226
+> -- 148
+< -- 0
++ -- 60
+- -- 52
+* -- 218
+:= -- 422
+add.period$ -- 18
+call.type$ -- 6
+change.case$ -- 44
+chr.to.int$ -- 0
+cite$ -- 7
+duplicate$ -- 66
+empty$ -- 166
+format.name$ -- 52
+if$ -- 484
+int.to.chr$ -- 0
+int.to.str$ -- 6
+missing$ -- 6
+newline$ -- 33
+num.names$ -- 12
+pop$ -- 34
+preamble$ -- 1
+purify$ -- 38
+quote$ -- 0
+skip$ -- 41
+stack$ -- 0
+substring$ -- 177
+swap$ -- 6
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 24
+warning$ -- 1
+while$ -- 19
+width$ -- 7
+write$ -- 67
+(There was 1 warning)

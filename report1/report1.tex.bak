@@ -1,0 +1,109 @@
+\documentclass{article}
+%\documentclass{IEEETran}
+
+%\usepackage{anysize}
+%\usepackage[left=1.9cm,right=1.9cm,top=2.54cm,bottom=1.9cm]{geometry}
+%\usepackage{sectsty}
+%\sectionfont{\normalsize \bf}
+%\subsectionfont{\normalsize \bf}
+
+%\IEEEoverridecommandlockouts  
+%\overrideIEEEmargins
+
+%\usepackage{siunitx}
+\usepackage{setspace} 
+%\doublespacing
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\theoremstyle{remark}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{remark}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{property}{Property}
+\theoremstyle{remark}
+\newtheorem{definition}{Definition}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[bottom]{footmisc}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{enumerate}
+%===================================
+
+\title{ Optimal Control of An Invasive Plant in n-D Action Space}
+
+\makeatletter
+\let\@fnsymbol\@arabic
+\makeatother
+\author{Soheil}
+\date{}
+\begin{document}
+\maketitle
+\section{Definitions}
+\begin{itemize}
+ \item States: The number of the plant in the whole region, the number of week in a year, the number of other important plans that we might be interested to consider (or possible be affected by the efforts of controlling our plant.
+ 
+ \item Actions: Not taking action, using pesticide, cutting the plant, growing native competitor plants
+ \item Transition Probabilities:
+ \item Rewards: The total net profit of all farmers
+\end{itemize}
+
+\section{Summery of Some Papers}
+\begin{enumerate}
+ \item General notes
+ 	\begin{itemize}
+ 		\item As trade and travel increase worldwide, the number of NIS introductions continues to rise (Perrings et al., 2002). Ecosystems may become more vulnerable through disturbance from human activity or the spread of other invasive species \cite{MEHTA2007237}.
+ 		\item The argument for focusing on preventing introductions is that once the species has been introduced, controlling the species can be very expensive and may be impossible. However, species enter through numerous pathways, such as commodity and human movement \cite{MEHTA2007237}.
+ 		\item Excessive pesticide use may accelerate the evolution of pesticide resistance (Mallet 1989), which reduces our capacity to control pests and necessitates the development of more potent pesticides with unknown environmental impact
+ 		\item pesticide applications can adversely affect nontarget species. When pesticide applications depress populations of beneficial species, such as pest predators, these applications can contribute to secondary pest outbreaks and therefore augment future crop damage and pesticide costs
+ 		\item pesticides are detrimental to both human health and ecosystem health
+
+	\end{itemize}
+
+ \item Optimal detection and control strategies for invasive species management \cite{MEHTA2007237}:
+ 	\begin{itemize}
+ 		\item The costs associated with detecting a nascent invasive species, especially at low population levels, may be quite high.
+ 		\item Analysis of the trade-offs between detection and subsequent control costs using a stochastic dynamic model for a single invasive species
+ 		\item The model focuses on the detection stage when the agency manager determines the level of search effort to detect an invasive species. The manager identifies the optimal search effort by minimizing the expected present value of the total costs of search plus controlling the population.
+ 		\item They applied the model to identify the optimal search intensity for species with different economic and biological characteristics.
+ 		\item Modeling the detection decision and analyzing potential trade-offs between allocating resources to detection versus post-detection control costs.
+	\end{itemize}
+
+ \item A data-driven, machine learning framework for optimal pest management in cotton \cite{ecs2.1263}
+ \begin{itemize}
+ 	\item They drive a data-driven decision support to help farmers optimize pest management strategies.
+ 	\item They built a Markov decision process model to identify the optimal management policy of a key cotton pest, Lygus hesperus, that balances the tradeoff between yield loss and the cost of pesticide applications
+ \end{itemize}
+
+ \item PAC Optimal MDP Planning with Application to Invasive Species Management \cite{taleghan15a}
+ 	\begin{itemize}
+ 		\item It studies MDP planning algorithms that attempt to minimize the number of simulator calls before terminating and outputting a policy that is approximately optimal with high probability
+ 		\item Introduces two heuristics for efficient exploration and an improved confidence interval that enables earlier termination with probabilistic guarantees
+ 		\item They prove that the heuristics and the confidence interval are sound and produce with high probability an approximately optimal policy in polynomial time
+		\item Because of the separation between the exploration phase (where the simulator is invoked and a policy is computed) and the exploitation phase (where the policy is executed in the actual ecosystem), we refer to these ecosystem management problems as problems of MDP Planning rather than of Reinforcement Learning. In MDP planning, we do not need to resolve the exploration-exploitation trade-off.
+		\item Another aspect of these MDP planning problems that distinguishes them from reinforcement learning is that the planning algorithm must decide when to terminate and output a policy. Many reinforcement learning algorithms don't do that.
+		\item Algorithms for ecosystem management problems must produce an explicit policy in order to support discussions with stakeholders and managers to convince them to adopt and execute the policy
+		\item there are two sources of constraint that algorithms can exploit to reduce simulator calls. First, the transition probabilities in the MDP may be sparse so that only a small fraction of states are directly reachable from any given state. Second, in MDP planning problems, there is a designated starting state s0, and the goal is to find an optimal policy for acting in that state and in all states reachable from that state. In the case where the optimality criterion is cumulative discounted reward, an additional constraint is that the algorithm only need to consider states that are reachable within a fixed horizon, because rewards far in the future have no significant impact on the value of the starting state.
+
+	\end{itemize}
+ 
+ \item Optimal Spatial-Dynamic Management of Stochastic Species Invasions \cite{Hall2018}
+ 
+ \item The Role of Restoration and Key Ecological Invasion Mechanisms in Optimal Spatial-Dynamic Management of Invasive Species \cite{ALBERS201844}
+ 
+ \item Finding the best management policy to eradicate invasive species from spatial ecological networks with simultaneous actions \cite{doi:10.1111}
+ 
+ 
+\end{enumerate}
+
+
+
+\bibliographystyle{plain}
+\bibliography{invasive_species}
+\end{document}
