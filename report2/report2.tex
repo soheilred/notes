@@ -24,11 +24,14 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage[bottom]{footmisc}
-\usepackage{hyperref}
+%\usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{enumerate}
 \usepackage[capitalize]{cleveref}
+\usepackage[dvipsnames]{xcolor}
 %===================================
+
+\newcommand{\marek}[1]{\textcolor{Bittersweet}{#1}}
 
 % Create nicer paragraph spacing
 \setlength{\parskip}{2mm plus1mm minus1mm}
@@ -68,9 +71,22 @@ As mentioned before, we are seeking for the most basic solution for this problem
  \item One possibility for employing different kinds of strategies (taking different actions) is to simply use a threshold in order to apply or to not apply a policy. For instance, pesticide, might or might not be used in a grid of land with a certain area (higher or lower than a threshold).
 \end{enumerate}
 
+\section{Related Work}
+
+\subsection{MDPs}
+
+\begin{enumerate}
+	\item Bayesian model with a simple state space: \cite{Meisner2016}
+	\item Exploration in very small problems (non-spatial): \cite{Hall2018,Taleghan2015}
+	\item Spatial model: \cite{Nicol2017}
+	\item \marek{read}: \cite{Albers2018}
+	\item \marek{read}: \cite{Mehta2007}
+\end{enumerate}
+
+\subsection{One-step (No uncertainty)}
+
 \section{Simple Population-Based Model}
 
-Construct a 
 
 \section{Value Function Approximation}
 
