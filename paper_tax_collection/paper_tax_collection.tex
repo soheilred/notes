@@ -1,0 +1,68 @@
+\documentclass{article}
+%\documentclass{IEEETran}
+
+%\usepackage{anysize}
+%\usepackage[left=1.9cm,right=1.9cm,top=2.54cm,bottom=1.9cm]{geometry}
+%\usepackage{sectsty}
+%\sectionfont{\normalsize \bf}
+%\subsectionfont{\normalsize \bf}
+
+%\IEEEoverridecommandlockouts  
+%\overrideIEEEmargins
+
+%\usepackage{siunitx}
+\usepackage{setspace} 
+%\doublespacing
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\theoremstyle{remark}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{remark}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{property}{Property}
+\theoremstyle{remark}
+\newtheorem{definition}{Definition}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[bottom]{footmisc}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{enumerate}
+%===================================
+
+\title{Tax Collection Optimization}
+
+\makeatletter
+\let\@fnsymbol\@arabic
+\makeatother
+\author{Soheil}
+\date{}
+\begin{document}
+\maketitle
+\section{Main Ideas}
+ The system optimizes the total tax collection in long-term, considering the connection between businesses and dependencies among their needs, resources and legal constraints. The data analysis and optimization is done in a constrained Markov decision processes (C-MDP) framework. The output of the the C-MDP is a customized policy in tax collecting, which was different than its predecessor that had broad-brush rules, therefore, improves both efficiency and adaptiveness of the collection. It also enhances fairness in the procedure.
+
+\section{Important Notes}
+\begin{itemize}
+	\item Although the sequential dependencies between various collections stages are automatically discovered, the system also accepts hard constraints, which are expressed as rules, for use in its optimization process.
+	\item Existing systems based on manually constructed rules suffer from the shortcoming that the rules do not adapt to changes in the environment.
+	\item An alternative to such a rigid manual rule system is a mathematical model that describes the complex collections process, applies analytics to estimate it, and then optimizes to arrive at a collections pol- icy within the class of policies describable in the model. The MDP provides one such framework with a rich-enough vocabulary to describe the complexity involved in a collections process.
+	\item In a previous work the states of the MDP were fixed a priori, and the transition probabilities among them were estimated prior to the optimization process. This is not enough for our set of diverse tax payer characteristics.
+	\item The \emph{states} of the MDP represent the stages in the collection process that respective taxpayers’ cases undergo. The \emph{actions} are the collections actions taken by DTF for those cases, and the \emph{rewards} are the dollars collected.
+	\item We can't simply assume that we know the structure of our MDP in such a high dimensional feature space problem. Instead, we have to use RL, approximate dynamic programming, to seek for a near optimal solution, \underline{given access only to the data generated form the MDP, not the MDP structure itself} (no idea what that means!)
+	\item Several types of constraints are involved. The first category consists of resource constraints that are imposed because some collections actions consume physical resources. Other constraints might not be resource related; these include bounds on the number of certain types of actions that are considered reasonable in a given period. The second major category of constraints, called action constraints, are those that are imposed by business or legal considerations
+	\item In previous works, either the data modeling has not been considered, or considered separately from the optimization process. In here, data analytics and optimization are tightly coupled and applied in an iterative fashion.
+	\item The key point lies in the constrained version of Bellman equation. Each iteration in an update consists of two process; estimating R, maximizing over actions. The estimation is done using segmented linear regression. When this process is completed, the out- put (a set of action effectiveness coefficients per segment) is entered into the optimization process, which determines a policy that allocates actions to maximize R over the population while respecting various constraints.
+
+\end{itemize}
+
+
+\bibliographystyle{plain}
+\bibliography{invasive_species}
+\end{document}

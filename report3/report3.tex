@@ -91,6 +91,25 @@ As mentioned before, we are seeking for the most basic solution for this problem
 	\item Spatial model: \cite{Nicol2017}
 	\item \marek{read}: \cite{Albers2018}
 	\item \marek{read}: \cite{Mehta2007}
+	\item Exponential Population Growth Model in Stan
+	\begin{itemize}
+		\item We describe here a simple state-space model of population growth and management of an invasive species. The state space is finite, relatively small, and simple. The main challenge is the high level of uncertainty that is involved in the dynamics of the system and in the observations.
+		\item Decisions of the policy maker must be based on $y_t$ instead of $N_t$. Note that relying on $y_t$ in place of $N_t$ mildly violates the Markov assumption (Why???).
+		\item To be able to run a simulation and study effects of different treatment strategies, we need be able to provide the policy that determines when $z_t=1$. One of the simplest options is a threshold policy: the treatment is applied if and only if the population achieves some specified value threshold.
+		\item The policies also need to allow for randomization in order to generate experimental data.
+
+		\begin{equation}
+		  \pi(y_t)=\begin{cases}
+		    0 & \text{if $y_t <$  threshold}.\\
+		    Z & \text{otherwise}.
+		  \end{cases}
+		\end{equation}
+		Z is drawn from a Bernoulli distribution.
+		\item
+
+
+
+	\end{itemize}
 \end{enumerate}
 
 \subsection{One-step (No uncertainty)}

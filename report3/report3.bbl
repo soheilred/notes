@@ -1,0 +1,42 @@
+\begin{thebibliography}{1}
+
+\bibitem{Albers2018}
+Heidi~J. Albers, Kim~Meyer Hall, Katherine~D. Lee, Majid~Alkaee Taleghan, and
+  Thomas~G. Dietterich.
+\newblock The role of restoration and key ecological invasion mechanisms in
+  optimal spatial-dynamic management of invasive species.
+\newblock {\em Ecological Economics}, 151:44 -- 54, 2018.
+
+\bibitem{Hall2018}
+Kim~Meyer Hall, Heidi~J. Albers, Majid Alkaee~Taleghan, and Thomas~G.
+  Dietterich.
+\newblock Optimal spatial-dynamic management of stochastic species invasions.
+\newblock {\em Environmental and Resource Economics}, 70(2):403--427, Jun 2018.
+
+\bibitem{Mehta2007}
+Shefali~V. Mehta, Robert~G. Haight, Frances~R. Homans, Stephen Polasky, and
+  Robert~C. Venette.
+\newblock Optimal detection and control strategies for invasive species
+  management.
+\newblock {\em Ecological Economics}, 61(2):237 -- 245, 2007.
+
+\bibitem{Meisner2016}
+Matthew~H. Meisner, Jay~A. Rosenheim, and Ilias Tagkopoulos.
+\newblock A data-driven, machine learning framework for optimal pest management
+  in cotton.
+\newblock {\em Ecosphere}, 7(3):e01263, 2016.
+
+\bibitem{Nicol2017}
+Sam Nicol, Regis Sabbadin, Nathalie Peyrard, and Iadine Chadès.
+\newblock Finding the best management policy to eradicate invasive species from
+  spatial ecological networks with simultaneous actions.
+\newblock {\em Journal of Applied Ecology}, 54(6):1989--1999, 2017.
+
+\bibitem{Taleghan2015}
+Majid~Alkaee Taleghan, Thomas~G. Dietterich, Mark Crowley, Kim Hall, and H.~Jo
+  Albers.
+\newblock Pac optimal mdp planning with application to invasive species
+  management.
+\newblock {\em Journal of Machine Learning Research}, 16:3877--3903, 2015.
+
+\end{thebibliography}
