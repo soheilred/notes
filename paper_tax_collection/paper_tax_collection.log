@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.5.24)  25 SEP 2018 23:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.5.24)  26 SEP 2018 10:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -381,22 +381,26 @@ Overfull \hbox (50.88953pt too wide) in paragraph at lines 58--59
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+
 No file paper_tax_collection.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 68.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 76.
 [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 68.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 76.
  (./paper_tax_collection.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 68.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 68.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 76.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 76.
 Package rerunfilecheck Info: File `paper_tax_collection.out' has not changed.
-(rerunfilecheck)             Checksum: 24D71C4D784D43A6ADEC2BBA83A0C859;95.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 68.
+(rerunfilecheck)             Checksum: 56247C66310D23832C7F1CB577E46F68;139.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 76.
  ) 
 Here is how much of TeX's memory you used:
- 6380 strings out of 494880
- 91157 string characters out of 6179601
+ 6382 strings out of 494880
+ 91177 string characters out of 6179601
  171043 words of memory out of 5000000
- 9627 multiletter control sequences out of 15000+600000
+ 9628 multiletter control sequences out of 15000+600000
  11234 words of font info for 44 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  28i,6n,43p,562b,392s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -406,10 +410,10 @@ r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on paper_tax_collection.pdf (2 pages, 69942 bytes).
+Output written on paper_tax_collection.pdf (2 pages, 71983 bytes).
 PDF statistics:
- 50 PDF objects out of 1000 (max. 8388607)
- 39 compressed objects within 1 object stream
- 5 named destinations out of 1000 (max. 500000)
- 17 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 54 PDF objects out of 1000 (max. 8388607)
+ 43 compressed objects within 1 object stream
+ 6 named destinations out of 1000 (max. 500000)
+ 25 words of extra memory for PDF output out of 10000 (max. 10000000)
 

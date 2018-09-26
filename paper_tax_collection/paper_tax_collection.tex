@@ -58,8 +58,15 @@
 	\item We can't simply assume that we know the structure of our MDP in such a high dimensional feature space problem. Instead, we have to use RL, approximate dynamic programming, to seek for a near optimal solution, \underline{given access only to the data generated form the MDP, not the MDP structure itself} (no idea what that means!)
 	\item Several types of constraints are involved. The first category consists of resource constraints that are imposed because some collections actions consume physical resources. Other constraints might not be resource related; these include bounds on the number of certain types of actions that are considered reasonable in a given period. The second major category of constraints, called action constraints, are those that are imposed by business or legal considerations
 	\item In previous works, either the data modeling has not been considered, or considered separately from the optimization process. In here, data analytics and optimization are tightly coupled and applied in an iterative fashion.
-	\item The key point lies in the constrained version of Bellman equation. Each iteration in an update consists of two process; estimating R, maximizing over actions. The estimation is done using segmented linear regression. When this process is completed, the out- put (a set of action effectiveness coefficients per segment) is entered into the optimization process, which determines a policy that allocates actions to maximize R over the population while respecting various constraints.
-	
+	\item The key point lies in the constrained version of Bellman equation. Each iteration in an update consists of two process; estimating R, maximizing over actions. The estimation is done using segmented linear regression. When this process is completed, the output (a set of action effectiveness coefficients per segment) is entered into the optimization process, which determines a policy that allocates actions to maximize R over the population while respecting various constraints.
+	\item In addition to the modeling features, the engine uses a group of features called action constraints binary features specifying, for each action considered, whether the action is currently allowed on the case, according to the business and legal rules
+
+\section{Questions}
+1. How many states and actions does the MDP that they are using have?
+There is a drastically simplified version of the state chart which demonstrates the states that a taxpayer is at. However, in their analysis, they used segmentation based on 200 features to model the state of a taxpayer. In addition, in table 1, a list of actions alongside with their respective costs is shown.
+
+2. What is the purpose of the constraints mentioned in the paper?
+In the constrained version of Bellman’s equation, the maximization on the right side is obtained through constrained optimization rather than through strict maximization.
 
 \end{itemize}
 
