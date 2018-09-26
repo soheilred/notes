@@ -59,6 +59,7 @@
 	\item Several types of constraints are involved. The first category consists of resource constraints that are imposed because some collections actions consume physical resources. Other constraints might not be resource related; these include bounds on the number of certain types of actions that are considered reasonable in a given period. The second major category of constraints, called action constraints, are those that are imposed by business or legal considerations
 	\item In previous works, either the data modeling has not been considered, or considered separately from the optimization process. In here, data analytics and optimization are tightly coupled and applied in an iterative fashion.
 	\item The key point lies in the constrained version of Bellman equation. Each iteration in an update consists of two process; estimating R, maximizing over actions. The estimation is done using segmented linear regression. When this process is completed, the out- put (a set of action effectiveness coefficients per segment) is entered into the optimization process, which determines a policy that allocates actions to maximize R over the population while respecting various constraints.
+	
 
 \end{itemize}
 
