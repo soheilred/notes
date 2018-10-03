@@ -1,0 +1,72 @@
+\documentclass{article}
+%\documentclass{IEEETran}
+
+%\usepackage{anysize}
+%\usepackage[left=1.9cm,right=1.9cm,top=2.54cm,bottom=1.9cm]{geometry}
+%\usepackage{sectsty}
+%\sectionfont{\normalsize \bf}
+%\subsectionfont{\normalsize \bf}
+
+%\IEEEoverridecommandlockouts  
+%\overrideIEEEmargins
+
+%\usepackage{siunitx}
+\usepackage{setspace} 
+%\doublespacing
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\theoremstyle{remark}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{remark}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{property}{Property}
+\theoremstyle{remark}
+\newtheorem{definition}{Definition}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[bottom]{footmisc}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{enumerate}
+%===================================
+
+\title{The Optimizer's Curse}
+
+\makeatletter
+\let\@fnsymbol\@arabic
+\makeatother
+\author{Soheil}
+\date{}
+\begin{document}
+\maketitle
+\section{Main Ideas}
+In decision analysis, we typically identify a set of alternatives, calculate their expected values, and choose the ones with highest expected values.
+
+When we are a decision maker, if we only choose alternatives based on the estimated values, we will often soon to be disappointed. This phenomenon is called optimizer's curse. This is not happening because of any inherent bias in the estimates, but because of the optimization based selection.
+
+
+Being conditionally unbiased means:
+$ \mathcal{E}[V_i | \mu_1, ..., \mu_n ] = \mu_i $
+
+\section{Questions}
+
+1. Why is this paper relevant to reinforcement learning?
+
+In reinforcement learning, we do the exact same thing by using bellman equations. First, we find the best expected value, then we pick it. But, as said in this paper, this method is prone to pick an alternative which almost always has a lower value than it's expected value.
+
+2. How would you beat the optimizer's curse without using Bayesian estimates?
+
+I will choose the alternative value estimates to be positively correlated.
+
+
+3. What are the pro's and con's of using Bayesian estimates?
+
+\bibliographystyle{plain}
+\bibliography{invasive_species}
+\end{document}
