@@ -96,6 +96,17 @@ As mentioned before, we are seeking for the most basic solution for this problem
 		\item We describe here a simple state-space model of population growth and management of an invasive species. The state space is finite, relatively small, and simple. The main challenge is the high level of uncertainty that is involved in the dynamics of the system and in the observations.
 		\item Decisions of the policy maker must be based on $y_t$ instead of $N_t$. Note that relying on $y_t$ in place of $N_t$ mildly violates the Markov assumption (Why???).
 		\item To be able to run a simulation and study effects of different treatment strategies, we need be able to provide the policy that determines when $z_t=1$. One of the simplest options is a threshold policy: the treatment is applied if and only if the population achieves some specified value threshold.
+		\item The dynamics of the population can be represented as
+		$$ N_{t+1} = \min \{\lambda_t N_t, K \} $$
+		where $K$ is the maximum carrying capacity, and $\lambda$ is the growth rate. The growth rate is:
+		\begin{equation}
+		\lambda_t = \begin{cases}
+				\max \{ 0, \bar{\lambda} + \mathcal{N}(0, \sigma_\lambda^2) \} & \text{if $z_t = 0 $} \\
+				\bar{\lambda} - N_t \beta_1 - \max \{ 0, N_t - \bar{N}\}^2\beta_2 + \mathcal{N}(0, \sigma_\lambda^2) & \text{otherwise}
+			\end{cases}
+		\end{equation}
+
+		where $\beta_1$ and $\beta_2$ are the coefficient of effectiveness.
 		\item The policies also need to allow for randomization in order to generate experimental data.
 
 		\begin{equation}
@@ -105,7 +116,7 @@ As mentioned before, we are seeking for the most basic solution for this problem
 		  \end{cases}
 		\end{equation}
 		Z is drawn from a Bernoulli distribution.
-		\item
+		\item The main goal in solving this discounted MDP is to find out for each population level, whether we need to do the treatment action or not. As always, we try to maximize the discounted expected rewards.
 
 
 
