@@ -52,7 +52,7 @@ When we are a decision maker, if we only choose alternatives based on the estima
 
 
 Being conditionally unbiased means:
-$ \mathcal{E}[V_i | \mu_1, ..., \mu_n ] = \mu_i $
+$$ \mathbb{E}[V_i | \mu_1, ..., \mu_n ] = \mu_i $$
 
 \section{Questions}
 
@@ -62,11 +62,10 @@ In reinforcement learning, we do the exact same thing by using bellman equations
 
 2. How would you beat the optimizer's curse without using Bayesian estimates?
 
-I will choose the alternative value estimates to be positively correlated.
+By spliting the samples into training and test samples. We use the training part to pick the best actions, and use the test part to evaluate our pick.
 
 
 3. What are the pro's and con's of using Bayesian estimates?
 
-\bibliographystyle{plain}
-\bibliography{invasive_species}
+
 \end{document}

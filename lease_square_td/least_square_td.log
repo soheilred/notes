@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.9.13)  4 OCT 2018 09:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.5.24)  9 OCT 2018 02:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**report.tex
-(./report.tex
+**least_square_td.tex
+(./least_square_td.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 5 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -285,8 +285,9 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (/usr/share/texlive/texmf-dist/tex/latex/tools/enumerate.sty
 Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
 \@enLab=\toks27
-) (./report.aux)
-\openout1 = `report.aux'.
+)
+(./least_square_td.aux)
+\openout1 = `least_square_td.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
 LaTeX Font Info:    ... okay on input line 46.
@@ -348,9 +349,9 @@ LaTeX Info: Redefining \ref on input line 46.
 LaTeX Info: Redefining \pageref on input line 46.
 LaTeX Info: Redefining \nameref on input line 46.
 
-(./report.out) (./report.out)
+(./least_square_td.out) (./least_square_td.out)
 \@outlinefile=\write3
-\openout3 = `report.out'.
+\openout3 = `least_square_td.out'.
 
 LaTeX Font Info:    Try loading font information for U+msa on input line 48.
 
@@ -361,27 +362,28 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 48.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 71.
- [1
+) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 71.
- (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 71.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 71.
-Package rerunfilecheck Info: File `report.out' has not changed.
+No file least_square_td.bbl.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 67.
+[2]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 67.
+ (./least_square_td.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 67.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 67.
+Package rerunfilecheck Info: File `least_square_td.out' has not changed.
 (rerunfilecheck)             Checksum: 2EA4423B0B92F781272BEF85F52F9228;89.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 71.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 67.
  ) 
 Here is how much of TeX's memory you used:
- 6359 strings out of 494880
- 90652 string characters out of 6179601
- 169037 words of memory out of 5000000
+ 6361 strings out of 494880
+ 90779 string characters out of 6179601
+ 171069 words of memory out of 5000000
  9612 multiletter control sequences out of 15000+600000
  10888 words of font info for 43 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 28i,6n,43p,306b,324s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,6n,43p,1264b,326s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texli
@@ -389,12 +391,11 @@ ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/symbols/msbm10.pfb>
-Output written on report.pdf (1 page, 79302 bytes).
+lic/amsfonts/cm/cmsy7.pfb>
+Output written on least_square_td.pdf (2 pages, 83127 bytes).
 PDF statistics:
  58 PDF objects out of 1000 (max. 8388607)
  45 compressed objects within 1 object stream
- 4 named destinations out of 1000 (max. 500000)
+ 5 named destinations out of 1000 (max. 500000)
  17 words of extra memory for PDF output out of 10000 (max. 10000000)
 
