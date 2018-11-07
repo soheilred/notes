@@ -1,0 +1,178 @@
+\documentclass{article}
+%\documentclass{IEEETran}
+
+%\usepackage{anysize}
+%\usepackage[left=1.9cm,right=1.9cm,top=2.54cm,bottom=1.9cm]{geometry}
+%\usepackage{sectsty}
+%\sectionfont{\normalsize \bf}
+%\subsectionfont{\normalsize \bf}
+
+%\IEEEoverridecommandlockouts  
+%\overrideIEEEmargins
+
+%\usepackage{siunitx}
+\usepackage{setspace} 
+%\doublespacing
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\theoremstyle{remark}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{remark}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{property}{Property}
+\theoremstyle{remark}
+\newtheorem{definition}{Definition}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[bottom]{footmisc}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{enumerate}
+%===================================
+
+\title{Deep Reinforcement Learning that Matters}
+
+\makeatletter
+\let\@fnsymbol\@arabic
+\makeatother
+% \author{Soheil}
+\date{}
+\begin{document}
+\maketitle
+\section{Main Ideas}
+This paper studies the reproducibility of works done in the field of Reinforcement Learning. They show that the interest in RL is growing fast. However, if the working criteria in this field won't change to the direction of making a reproducible work, people will lose their interest in working on RL.
+
+They have multiple suggestions in order to reach to this goal. In the following, we will see these factors and a brief summary of how they can matter.
+
+\subsection{Hyperparameters}
+Tuning hyperparameters are of a great importance in the performance of our algorithm. It is suggested that the proposed algorithm should narrow down the choice of hyperparameters by itself. So, we want our algorithm to be hyperparameter agnostic. In addition, it is preferred that the result is reported using a variety of hyperparameters, so that the effect of them becomes clear.
+
+\subsection{Network Architecture}
+Choosing a good network architecture and activation function is crucial for the success of the algorithm. Different architecture will lead to significantly different results. This is where having hyperparameter agnostic algorithm comes in handy. Because we don't want to deal with choosing the hyperparameters too, when we are trying to find a good network architecture, which, itself, is a hard task and deals with selecting multiple parameters.
+
+\subsection{Reward Scale}
+In gradient based algorithms, scaling the rewards up will cause some issues regarding to saturation and inefficiency in learning. So, what we need is to have a common definition for the reward, so that we can use it as a baseline in other researches in RL.
+
+\subsection{Random Seeds}
+The stochasticity in the environment and the learning process has a drastic influence on the result of our algorithm. It's common to report an average of the results across multiple trial, or take the max over multiple trial. But, those could also be misleading. We need more research in this area to find a more reliable approach in reporting results with randomness in their nature.
+
+\subsection{Environment}
+Most of the works that are done in the branch of control in RL, suffer from the fact that the environment can play an important role, yet it's often neglected. It is common to only report the results for one set of environmental variables. However, changing this variables can drastically change the performance.
+
+\subsection{Codebases}
+Often times a proposed algorithm is tested against other algorithms that are implemented by the authors themselves. Subtle difference in implementation can lead to a huge difference in performance. So, we need to have a united platform in RL to test our proposed algorithms in a more fair way.
+
+
+\end{document}
+
+
+%===============================
+%========== NOT TO RUN =========
+\iffalse
+
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}   % The style of the section title
+  {}                             % a prefix
+  {0pt}                          % How much space exists between the prefix and the title
+  {Section \thesection:\quad}    % How the section is represented
+
+% Starred variant
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}
+  {}
+  {0pt}
+  {}
+  
+
+asdasd \cite{1013341}. Fig.~\ref{Fig_Example}.
+
+{\fontfamily{pcr}\selectfont 
+run files}
+
+\begin{enumerate}
+  \item The labels consists of sequential numbers.
+  \item The numbers starts at 1 with every call to the enumerate environment.
+\end{enumerate}
+
+\begin{itemize}
+
+\end{itemize}
+
+======== HYPERLINK =============
+Find the \texttt{run files} for all variants in \href{https://github.com/SHi-ON/InfoRet/tree/master/results/Assignment_4}{here}
+
+
+====== FIGURES ========
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=.40]{Fig_Example.pdf}
+	\caption{Example.}
+	\label{Fig_Example}
+\end{figure}
+
+\input{second}
+
+========= EQUATIONS =============
+
+\begin{equation}
+\left\|\frac{\partial V}{\partial\mathbf{x}_1}\right\|\left\|\mathbf{x}_1\right\|\leq c_1V\quad \text{for}\; \left\|\mathbf{x}_1\right\|\geq c_2
+\end{equation}
+
+
+============ TABLES =============
+
+\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+\hline
+\multicolumn{3}{|c|}{Country List} \\
+\hline
+Country Name     or Area Name& ISO ALPHA 2 Code &ISO ALPHA 3 \\
+\hline
+Afghanistan & AF &AFG \\
+Aland Islands & AX   & ALA \\
+Albania &AL & ALB \\
+Algeria    &DZ & DZA \\
+American Samoa & AS & ASM \\
+Andorra & AD & AND   \\
+Angola & AO & AGO \\
+\hline
+\end{tabular}
+
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ cell1 & cell2 & cell3 \\ 
+ cell4 & cell5 & cell6 \\ 
+ cell7 & cell8 & cell9 \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+
+
+
+\begin{lstlisting}[language=Python, caption=Code's name]
+import numpy as np
+ 
+def incmatrix(genl1,genl2):
+    m = len(genl1)
+    n = len(genl2)
+    M = None #to become the incidence matrix
+    VT = np.zeros((n*m,1), int)  #dummy variable
+\end{lstlisting}
+
+
+
+\begin{verbatim}
+Put your codes here!
+\end{verbatim}
+\fi
