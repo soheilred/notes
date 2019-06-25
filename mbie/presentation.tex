@@ -1,7 +1,7 @@
 % @Author: soheilred
 % @Date:   2018-10-28 01:10:54
 % @Last Modified by:   soheilred
-% @Last Modified time: 2018-11-07 05:38:25
+% @Last Modified time: 2018-11-07 15:30:03
 \documentclass{beamer}
 
 \let\val\undefined
@@ -122,6 +122,7 @@ Journal of Computer and System Science - Elsevier\\
 		\item In each \textbf{trial}, construct \textbf{confidence interval} for the mean of the payoff distribution for each \textbf{arm}
 		$$ [\hat{\mu_i} - \epsilon_i, \hat{\mu_i} + \epsilon_i] $$
 		\item If the confidence interval is loose, the mean payoff may not be near optimal, we need to gain more information
+		\item What is missing? \tcr{$\epsilon$}
 		\item Model-based Interval Estimation (MBIE) is based on PAC optimality.
 	\end{itemize}
 
@@ -133,7 +134,7 @@ Journal of Computer and System Science - Elsevier\\
 	\frametitle{What is PAC?}
 	\begin{itemize}
 		\item Probability Approximately Correct
-		\item In a supervised learning classification problem:
+		\item First developed for supervised learning classification problems
 		\item Set of observations instances $X$
 		\item Set of hypothesis $H$
 		\begin{itemize}
@@ -151,12 +152,12 @@ Journal of Computer and System Science - Elsevier\\
 		% Theorem: If hypothesis set H is finite, and D is a sequence of m>1 independent random examples of some target concept c, then for any $\epsilon \in [0,1]$, the probability that VS contains a hypothesis with error greater than $\epsilon$ is less than $$ |H|e^{-\epsilon m } $$.
 
 		% I want to put a bound on the true error (test error). How bad my classifier would be for a classifier that classifies all of my training set correctly. What is the chance of having a classifier that do bad on test and do very good on train set.
-
-		% $$ Pr(Err > \epsilon) $$ (Err is test error)
+		\item What is the probability that a classifier (with $\epsilon$ chance of misclassification), classifies correctly (Err is test error)
+		$$ Pr(Err > \epsilon) < |H|e^{\epsilon m} $$ 
 
 		% a classifier that has a true error of $\epsilon$, where has zero training error. This classifier classifies a point with $1 - \epsilon$ probability correctly. 
-		$$|H|e^{-\epsilon m} < \delta$$
-		$$m \geq 1/\epsilon (ln|H| + ln(1/\delta))$$
+		$|H|e^{-\epsilon m} < \delta \rightarrow$
+		$m \geq 1/\epsilon (ln|H| + ln(1/\delta))$
 	\end{itemize}
 	\footnotetext{Watch this! It's good! \url{https://www.youtube.com/watch?v=qOMOYM0WCzU&t=1181s}}
 \end{frame}
@@ -191,6 +192,15 @@ Journal of Computer and System Science - Elsevier\\
 			$$ \epsilon_{n(s,a)}^R = \sqrt{\frac{2/\delta_r}{2.n(s,a)}} $$
 		
 		\end{itemize}
+	\end{itemize}
+\end{frame}
+%=====================================%
+
+%=====================================%
+\begin{frame}
+	\frametitle{How PAC is applied to MDPs?}
+	\begin{itemize}
+		\item ???
 	\end{itemize}
 \end{frame}
 %=====================================%

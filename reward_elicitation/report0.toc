@@ -1,0 +1,6 @@
+\contentsline {subsection}{Reward Elicitation}{1}{section*.2}
+\contentsline {subsubsection}{Minimax Regret Example from wikipedia}{1}{section*.3}
+\contentsline {subsubsection}{Minimax}{2}{section*.4}
+\contentsline {subsection}{Minimax Regret for Imprecise MDPs}{2}{section*.5}
+\contentsline {subsection}{Linear Programming Approach to Dynamic Programming}{2}{section*.6}
+\contentsline {subsubsection}{example}{2}{section*.7}

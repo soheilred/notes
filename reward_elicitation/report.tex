@@ -1,0 +1,392 @@
+\documentclass{article}
+%\documentclass{IEEETran}
+
+%\usepackage{anysize}
+%\usepackage[left=1.9cm,right=1.9cm,top=2.54cm,bottom=1.9cm]{geometry}
+%\usepackage{sectsty}
+%\sectionfont{\normalsize \bf}
+%\subsectionfont{\normalsize \bf}
+
+%\IEEEoverridecommandlockouts  
+%\overrideIEEEmargins
+
+%\usepackage{siunitx}
+\usepackage{setspace} 
+%\doublespacing
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\theoremstyle{remark}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{remark}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{property}{Property}
+\theoremstyle{remark}
+\newtheorem{definition}{Definition}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[bottom]{footmisc}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{enumerate}
+%===================================
+
+\title{Reward Elicitation}
+
+\makeatletter
+\let\@fnsymbol\@arabic
+\makeatother
+% \author{Soheil}
+\date{}
+\begin{document}
+\maketitle
+\section{Introduction}
+
+Reward quantification is hard, cognitively complex in practice, and time consuming. It is problem dependent, and when it comes to deciding a value for quantities like "good" or "mediocre", users tend to not have a clear answer.
+
+
+Despite the lack of thorough knowledge about the reward function, it is crucial in reinforcement learning to find a way to obtain the optimal policy for an MDP. The limited information about the reward function can either be gained from a domain experts, or observed by an agent and enforced to the MDP as a set of constraints. We are looking for a robust policy that achieves the highest reward to the best of agent's knowledge. Please note that our focus in this paper is different than apprenticeship learning \cite{abbeel2004}. We do not try to mimic a demonstrator. But rather, we are trying to find a policy that can guarantee robustness.
+
+
+One approach to tackle this problem is to use \emph{maximin}. The agent gets to choose a policy, and an adversary chooses a reward function from a set of feasible rewards. What the agent is really doing, is to maximize the worst reward that the adversary chooses in order to beat the agent.
+
+
+Dynamic Programming (DP) is one of the main methods of finding an optimal policy in the field of reinforcement learning. It is also used to frame the problem of robust MDPs. In case of full knowledge of MDP, Approximate Linear Programming (ALP) was successfully used in order to find an approximation to the optimal policy \cite{DeFarias2003}. However, specifying the reward function is sometimes impossible. And, therefore, we are looking for ways to find the optimal policy, given a limited knowledge we have about an MDP.
+
+
+In order to solve the problem of imprecisely determined MDP, we start off with formulating a DP as an LP \cite{Decision2005c}. The reason to choose LP to represent the problem is mainly because this formulation makes it possible to incorporate an imprecise constrained reward function into the problem in the form of a convex polytope, which is assumed to be bounded. This bounds on the reward function are observed from the MDP's behavior. 
+
+DeFarias et al. in \cite{VanRoy2002} give the foundation of Approximate Linear Program, and the error bound for the approximation in LP approach to DP.
+
+
+In \cite{Petrik2010a} Marek et al. used $L_1$ regularization to improve the quality of approximation in ALP.
+
+Van Roy expands the idea of approximation in value function to state aggregation in \cite{VanRoy2006c}.
+
+% And \cite{DeFarias2003} is a more elaborated version of \cite{VanRoy2002}, with more proofs.
+
+In \cite{Regan2012}, Regan et al. studied the effect of precision in specifying the reward function on finding the optimal policy. The key idea is to use minimax regret decision criterion, which is intuitively based on minimum regret or loss. The \textit{minimax regret} approach minimizes the worst-case regret. One benefit of minimax (as opposed to expected regret) is that it is independent of the probabilities of the various outcomes: thus if regret can be accurately computed, one can reliably use minimax regret. However, probabilities of outcomes are hard to estimate.
+
+
+Another contribution of their work is an elicitation criteria that guides the \emph{querying process}. This, in turn, can give us a boundary for "how good" the optimal policy can be determined, or "how close" is the obtained optimal policy to the "real" optimal policy. Minimax criteria is employed in this work, which gives the maximum security level, or the best worst-case scenario. For reward elicitation they used an approach called "bound queries", which is simply finding boundary for $r(s,a)$ by having a user answering to the question "Is $r(s,a) \geq b$".
+
+
+Huang's work in \cite{Huang2018}, is heavily based on inverse RL and apprenticeship learning in the sense of \emph{expert demonstration}. Apprenticeship learning has a performance that is, at least, as good as an expert's policy given the set of all possible rewards. It can be formulated using a maximin. In this study, unlike apprenticeship, we want to only use the data that is coming from the expert, rather than strictly following an expert. By doing so, we guarantee more robustness to the worst case scenario.
+
+
+
+
+\section{Robust Optimization for MDPs}
+
+Finding $v^*(s)$ is achieved by a minimization over the vector $v(s)$ when $v(s) \geq r(s,a)+\sum_{j \in S}\gamma P(j|s,a) v(j)$ for all $a$'s. We can formulate this for a single state as
+
+$$
+    \begin{matrix}
+    \min v(s) \\
+    s.t. \quad v(s) \geq r(s,a)+\sum_{j \in S}\gamma P(j|s,a) v(j) \quad \forall a \in \mathcal{A}
+    \end{matrix}
+$$
+
+Please note that the constraint consists of $m$ inequality, for all actions that can take place on state $s$. The minimization can be generalized for all states as
+
+$$
+\begin{matrix}
+
+    \min \sum_{j \in S} \alpha(j)v(j) \quad \\
+    s.t. \quad v(s) \geq r(s,a)+\sum_{j \in S}\gamma P(j|s,a) v(j) \quad \forall a,s \in \mathcal{A \times S} 
+\end{matrix}
+$$
+
+And, in vector form it would be
+
+$$
+  \begin{matrix}
+  
+    \min_v \alpha^\top  v \\
+    s.t. \quad A v \geq r
+  \end{matrix}
+$$
+
+In which $A_{nm*n} = E_{nm*n} - P_{nm*n}$, and $E_{nm*n}$ is a matrix consist of $m$ identity matrices of $n*n$ that is repeated $m$ times vertically. Note that the constraints has $n*m$ inequality.
+
+The dual of this minimization is:
+
+$$
+  \begin{matrix}
+  
+    \max_u r^\top  u \\
+    s.t. \quad A^\top  u = \alpha \\
+    u \geq 0
+  \end{matrix}
+$$
+
+In robust optimization we have two agents, one is trying to maximize the return, while the other one is minimizing it. This is how the best worst case scenario is picked. Applying the same idea to this problem we'll have
+
+$$
+  \begin{matrix}
+  
+    \min_r \max_u r^\top  u \\
+    s.t. \quad A^\top  u = \alpha \\
+    u \geq 0
+  \end{matrix}
+$$
+
+By strong duality we know that we can swap $\min$ and $\max$.
+
+$$
+  \begin{matrix}
+    \max_u \min_r r^\top  u \\
+    s.t. \quad A^\top  u = \alpha \\
+    u \geq 0
+  \end{matrix}
+$$
+
+The term $\min_r r^\top  u$ is independent of the constraints, since the variable that we are minimizing over is $r$, and the constraint is not a function of $r$.
+
+$$
+  \begin{matrix}
+    \max \limits_u & \min \limits_{r} r^\top u \\
+    A^\top u = \alpha  & \\
+    u \geq 0
+  \end{matrix}
+$$
+
+This minimization problem, misses a crucial element; the bound over $r$ (it'll go to $-\infty$ if $r$ is not bounded). $r$ can either be bounded by a set of limited feasible values such as $B=\{r_1, r_2,...r_l\}$. Or, it can be considered to be bounded by a set of linear constraints $Cr \leq d$, where $C$ is an $l \times nm$ matrix, where $l$ is the number of constraints on $r$. Both approaches are studied as follows.
+
+
+\subsection*{$B$ as a Set}
+
+Given $r \in B=\{r_1, r_2,...r_l\}$, we can reformulate the minimization as
+
+$$
+  \begin{matrix}
+    \min_r r^\top u  &=& \min \sum_{k = 1}^{k=l} \beta_k r_k^\top u\\
+    r \in \{r_1,...,r_l\} & & \sum_{k = 1}^{k=l} \beta_k = 1\\
+      & & \beta_k \geq 0 \\
+      & & \\
+      & = &\max \beta r^\top u \\
+      & & 1^\top \beta = 1 \\
+      & & \beta \geq 0
+  \end{matrix}
+$$
+
+Where $\beta = [\beta_1, \beta_2, ..., \beta_l]^\top$. The dual form of this problem is
+\[
+  \begin{matrix}
+    \max_t t & \\
+     & t < r_i^\top u \quad \forall i \leq l
+  \end{matrix}
+\]
+And the maximin problem becomes
+\[
+  \begin{matrix}
+    \max_{t,u} t & \\
+     & t < r_i^\top u \quad \forall i \leq l\\
+     & A^\top  u = \alpha \\
+     & u \geq 0 \\
+  \end{matrix}
+\]
+
+
+\subsection*{$B$ as a Polytope}
+
+The constraints can also be induced to the system using a set of linear inequalities. So, to solve the inner minimization problem we have:
+
+$$
+    \begin{matrix}
+        \min_r r^\top  u  &= \min_r r^\top  u  & = \min_r r^\top  u \\
+        r \in B & Cr \leq d & -Cr \geq -d
+    \end{matrix}
+$$
+
+The dual of this problem is
+
+$$
+  \begin{matrix}
+    \max_t -d^\top t \\
+    s.t. \quad -C^\top t = u \\
+    t \geq 0
+  \end{matrix}
+$$
+
+So, for the robust MDPs we have
+
+$$
+  \begin{matrix}
+    \max_{u,t} -d^\top t \\
+    s.t. \quad A^\top  u = \alpha \\
+    u \geq 0 \\
+    -C^\top t = u \\
+    t \geq 0
+  \end{matrix}
+$$
+
+
+\section*{Miscellaneous Notes}
+
+\subsection*{Minimax Regret for Imprecise MDPs}
+
+
+We know that $r \in \mathcal{R}$, where $\mathcal{R}$ is the feasible set for rewards, which reflects the current knowledge of the reward.
+
+
+$$
+  \begin{matrix}
+    R(f,r) = \max_{g \in \mathcal{F}} r.g - r.f \\
+    MR(f,\mathcal{R}) = \max_{r \in \mathcal{R}} R(f,r) \\
+    MMR(\mathcal{R}) = \min_{f \in \mathcal{F}} MR(f, \mathcal{R})
+  \end{matrix}
+$$
+
+$R(f,r)$ is the regret of policy f (as represented by its visitation frequencies) relative to reward function $r$: it is simply the loss or difference in value between f and the optimal policy under $r$. $MR(f,R)$ is the maximum regret of $f$ w.r.t. feasible reward set $\mathcal{R}$. Should we chose a policy with visitation frequencies $f$, $MR(f,R)$ represents the worst-case loss over all possible realizations of the reward function; i.e., the regret incurred in the presence of an adversary who chooses the $r$ from $\mathcal{R}$ to maximize our loss. Finally, in the presence of such an adversary, we wish to minimize this max regret: $MMR(R)$ is the minimax regret of feasible reward set $\mathcal{R}$. This can be viewed as a game between a decision maker choosing $f$ who wants to minimize loss relative to the optimal policy, and an adversary who chooses a reward to maximize this loss given the decision maker’s choice of policy. Any $f^*$ that minimizes max regret is a minimax optimal policy, while the $r$ that maximizes its regret is the witness or adversarial reward function, and the optimal policy $g$ for $r$ is the witness or adversarial policy.
+
+
+
+\subsection*{Inverse Reinforcement Learning} 
+
+The problem of extracting a reward function using an observation that is made from the optimal policy \cite{alg_for_irl_Ng}. The optimal policy is usually coming from an expert demonstration.
+
+\subsection*{Implementation Considerations}
+
+In order to implement a robust MDP solver on the Invasive Species problem, we need to have the followings: 
+Matrix $A$, which depends on $P_{s'}(s,a)$ (the model of the system), vector $\alpha$, and either set $B$, or matrix $C$ and vector $d$, which are the set of constraint on the reward.
+
+
+However, in Invasive Species project, we are dealing with a large state space. We cannot represent $P_{s'}(s,a)$ in a tabular format. In such cases, it's impossible for the solver to obtain the optimal policy, unless we replace the tabular representations in the problem with an approximation, and in particular, a linear approximation.
+
+Based on \cite{DeFarias2003}, we can formulate an approximate MDP solver as a Linear Program. The formulation looks very similar to the robust MDP solver, but, without the constraints on the reward function.
+
+
+So, I believe if I can formulate an ALP, and solve the invasive species problem with that, given the current reward function, then I would be able to incorporate the reward elicitation part into the problem, and solve the problem as a whole.
+
+One issue that we come across in ALPs is dealing with high number of samples. We are looking for the best possible way to pick a set of sample that best represent the state-space. (this part needs to be more studied from the Van Roy's paper)
+
+
+\subsection*{Separation Oracles}
+
+An algorithm that outputs TRUE if a given point (inside the ellipsoid $E_k$) is actually inside the set $P:\{x|Ax \leq b\}$ (feasible set). And if not, it returns a half space (the separator plan or a hyperplane $(w,c) s.t. \quad w.y \leq c \quad \forall y \in P$) that the set P is on it.
+
+\subsection*{Ellipsoid method}
+
+It's an alternative solution to an LP. It's slower than simplex in practice. The algorithm considers an ellipsoid in each iteration, and checks if the center of the ellipsoid 
+
+
+
+\section{Questions}
+
+
+
+\bibliographystyle{plain}
+\bibliography{invasive_species}
+\end{document}
+
+
+%===============================
+%========== NOT TO RUN =========
+\iffalse
+
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}   % The style of the section title
+  {}                             % a prefix
+  {0pt}                          % How much space exists between the prefix and the title
+  {Section \thesection:\quad}    % How the section is represented
+
+% Starred variant
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}
+  {}
+  {0pt}
+  {}
+  
+
+asdasd \cite{1013341}. Fig.~\ref{Fig_Example}.
+
+{\fontfamily{pcr}\selectfont 
+run files}
+
+\begin{enumerate}
+  \item The labels consists of sequential numbers.
+  \item The numbers starts at 1 with every call to the enumerate environment.
+\end{enumerate}
+
+\begin{itemize}
+
+\end{itemize}
+
+======== HYPERLINK =============
+Find the \texttt{run files} for all variants in \href{https://github.com/SHi-ON/InfoRet/tree/master/results/Assignment_4}{here}
+
+
+====== FIGURES ========
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=.40]{Fig_Example.pdf}
+	\caption{Example.}
+	\label{Fig_Example}
+\end{figure}
+
+\input{second}
+
+========= EQUATIONS =============
+
+\begin{equation}
+\left\|\frac{\partial V}{\partial\mathbf{x}_1}\right\|\left\|\mathbf{x}_1\right\|\leq c_1V\quad \text{for}\; \left\|\mathbf{x}_1\right\|\geq c_2
+\end{equation}
+
+
+============ TABLES =============
+
+\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+\hline
+\multicolumn{3}{|c|}{Country List} \\
+\hline
+Country Name     or Area Name& ISO ALPHA 2 Code &ISO ALPHA 3 \\
+\hline
+Afghanistan & AF &AFG \\
+Aland Islands & AX   & ALA \\
+Albania &AL & ALB \\
+Algeria    &DZ & DZA \\
+American Samoa & AS & ASM \\
+Andorra & AD & AND   \\
+Angola & AO & AGO \\
+\hline
+\end{tabular}
+
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ cell1 & cell2 & cell3 \\ 
+ cell4 & cell5 & cell6 \\ 
+ cell7 & cell8 & cell9 \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+
+
+
+\begin{lstlisting}[language=Python, caption=Code's name]
+import numpy as np
+ 
+def incmatrix(genl1,genl2):
+    m = len(genl1)
+    n = len(genl2)
+    M = None #to become the incidence matrix
+    VT = np.zeros((n*m,1), int)  #dummy variable
+\end{lstlisting}
+
+
+
+\begin{verbatim}
+Put your codes here!
+\end{verbatim}
+\fi

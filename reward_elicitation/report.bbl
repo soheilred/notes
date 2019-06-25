@@ -1,0 +1,50 @@
+\begin{thebibliography}{1}
+
+\bibitem{DeFarias2003}
+D.~P. de~Farias and B.~{Van Roy}.
+\newblock {The Linear Programming Approach to Approximate Dynamic Programming}.
+\newblock {\em Operations Research}, 51(6):850--865, 2003.
+
+\bibitem{Huang2018}
+Jessie Huang, Fa~Wu, Doina Precup, and Yang Cai.
+\newblock {Learning Safe Policies with Expert Guidance}.
+\newblock (Theorem 1):1--17, 2018.
+
+\bibitem{alg_for_irl_Ng}
+Andrew~y. Ng and {Stuart Russell}.
+\newblock algorithms for inverse reinforcement learning.
+
+\bibitem{Petrik2010a}
+Marek Petrik, Gavin Taylor, Ron Parr, and Shlomo Zilberstein.
+\newblock {Feature Selection Using Regularization in Approximate Linear
+  Programs for Markov Decision Processes}.
+\newblock 2010.
+
+\bibitem{abbeel2004}
+{Pieter Abbeel} and {Andrew Y.}
+\newblock {Apprenticeship Learning via Inverse Reinforcement Learning}.
+\newblock (346):1--2, 2004.
+
+\bibitem{Decision2005c}
+PUTERMAN.
+\newblock {Markov Decision Processes Discrete Stochastic Dynamic Programming
+  Chapter 6: Discounted Markov Decision Problems}.
+\newblock 1994.
+
+\bibitem{Regan2012}
+Kevin Regan and Craig Boutilier.
+\newblock {Regret-based Reward Elicitation for Markov Decision Processes}.
+\newblock pages 444--451, 2012.
+
+\bibitem{VanRoy2002}
+Benjamin {Van Roy}.
+\newblock {Approximate Dynamic Programming via Linear Programming}.
+\newblock {\em Comparative and General Pharmacology}, (1995):255--269, 2002.
+
+\bibitem{VanRoy2006c}
+Benjamin {Van Roy} and Benjamin.
+\newblock {Performance Loss Bounds for Approximate Value Iteration with State
+  Aggregation}.
+\newblock {\em Mathematics of Operations Research}, 31(2):234--244, may 2006.
+
+\end{thebibliography}

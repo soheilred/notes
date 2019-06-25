@@ -1,0 +1,222 @@
+% @Author: soheilred
+% @Date:   2018-10-28 01:10:54
+% @Last Modified by:   soheilred
+% @Last Modified time: 2019-02-18 15:24:39
+\documentclass{beamer}
+
+\let\val\undefined
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{natbib}
+\usepackage{framed}
+\usepackage{longtable}
+\usepackage{bigdelim,multirow}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+
+\usetikzlibrary{arrows,automata,backgrounds,positioning,decorations,intersections,matrix}
+
+% *** Styles ***
+\setbeamertemplate{navigation symbols}{}
+\usecolortheme{dolphin}
+%\usecolortheme{rose}
+\setbeamercovered{transparent}
+\usefonttheme{professionalfonts}
+%\usefonttheme[onlymath]{serif}
+
+% 
+\addtobeamertemplate{navigation symbols}{}{%
+    \usebeamerfont{footline} %
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \insertframenumber/\inserttotalframenumber
+}
+
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+
+
+% \setlist[itemize,1]{label=$\times$}
+% \setlist[itemize,2]{label=$\checkmark$}
+% \setlist[itemize,3]{label=$\diamond$}
+% \setlist[itemize,4]{label=$\bullet$}
+
+
+% *** Colors ***
+\newcommand{\tc}[2]{\textcolor{#1}{#2}}
+\newcommand{\tcb}[1]{\tc{blue}{#1}}
+\newcommand{\tcr}[1]{\tc{red}{#1}}
+\newcommand{\tcg}[1]{\tc{green}{#1}}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\newcommand{\Ex}{\mathbb{E}}
+%\newcommand{\Pr}{\mathbb{P}}
+\DeclareMathOperator{\Var}{Var}
+
+\definecolor{varcolor}{RGB}{132,23,49}
+\newcommand{\varname}[1]{\textcolor{varcolor}{\mathsf{#1}}}
+
+\title{Performance Loss Bounds for Approximate Value Iteration with State Aggregation \\ {\tiny Mathematics of Operations Research}}
+\author{Van Roy}
+\date{\today}
+
+\begin{document}
+\begin{frame}
+	\maketitle
+
+\end{frame}
+%=====================================%
+\begin{frame}
+	\frametitle{Problem Definition}
+	\begin{itemize}
+		\item What is this paper about?
+
+		How to approximate $J^*$, the optimal cost-to-go function (value function), with $\Phi r$?
+		\begin{itemize}
+			\item State Aggregation
+			\item Value Iteration
+			\item In particular, how to find $r \in \Re^K$?
+		\end{itemize}
+		\item What is this paper NOT about?
+
+		How to partition the space (or find $\Phi \in \Re^{|\varphi| \times K}$)?
+	\end{itemize}
+
+	\footnotetext{$|\varphi|$ is the number of states}
+\end{frame}
+%=====================================%
+
+%=====================================%
+
+\begin{frame}
+	\frametitle{Approximating $J$}
+	\begin{itemize}
+		\item 
+		\begin{equation} \label{eq:min}
+			\min\limits_{r} \norm{J - \Phi r}_{2,\pi}
+		\end{equation}
+		\item Projection with respect to a weighted Euclidean norm $\norm{.}_\pi$
+		\[
+			\norm{J}_{2,\pi} = \left( \sum_{x \in \varphi}{\pi (x) J^2(x)} \right)^{1/2}
+		\]
+		$\pi \in \Re_{+}^{\abs{\varphi}}$ is a vector of weights, showing the \tcr{\emph{importance}} of each state
+		\item To get \textit{\LARGE \tcb{r}}, we need to run value iteration
+		\[
+			\Phi r^{(l+1)} = \Pi_{\pi} T \Phi r^{(l)}
+		\]
+	\end{itemize}
+\end{frame}
+%=====================================%
+
+%=====================================%
+
+\begin{frame}
+	\frametitle{Calculating $r$}
+		\[
+			\Phi r^{(l+1)} = \Pi_{\pi} T \Phi r^{(l)}
+		\]
+	\begin{itemize}
+		\item T is the dynamic programming operator
+		\item T is a contraction
+		\item $\Pi_\pi$ is max-norm nonexpansive
+		\item $\Pi_\pi$ operator (matrix) projects onto the column space of $\Phi$ with respect to a weighted Euclidean Norm that minimizes equation (\ref{eq:min})
+		\item 
+		% \[
+		% 	(\Pi_\pi J) (x) = \frac{\sum_{y \in \varphi_k}{\pi(y) J(y)}}{\sum_{y \in \varphi_k}{\pi(y)}}
+		% \]
+		\[
+			\Pi_\pi = \Phi(\Phi^T D \Phi)^{-1} \Phi^T D
+		\]
+		where $D=diag(\pi_i)$
+	\end{itemize}
+\end{frame}
+%=====================================%
+
+%=====================================%
+
+\begin{frame}
+	\frametitle{Bounds}
+	\begin{itemize}
+		\item \tcr{Without considering} the importance weights, and when $\mu$ is greedy with respect to $\tilde{J}$ we have the bound\footnote{$\norm{J_\mu - J^*}_{\infty}$ is performance loss}:
+		\begin{equation}
+			\norm{J_\mu - J^*}_{\infty} \leq \frac{2\alpha}{1-\alpha}\norm{J^* - \tilde{J}}_{\infty}
+		\end{equation}
+		\item \tcr{Considering} the importance weights and when $\Phi \tilde{r} = \Pi_{\pi} T \Phi \tilde{r}$
+		\begin{itemize}
+			\item \emph{Approximation Error Bound}
+			\[
+				\norm{\Phi \tilde{r} - J^*}_{\infty} \leq \frac{2}{1-\alpha} \min\limits_{r \in \Re^K}\norm{J^* - \tilde{J}}_{\infty}
+			\]
+			\item \emph{Performance Loss Bound}
+			\[
+				(1-\alpha)\norm{J_{\mu \tilde{r}} - J^*}_{\infty} \leq \frac{4\alpha}{1-\alpha}\min\limits_{r \in \Re^K}\norm{J^* - \Phi r}_{\infty}
+			\]
+			\item HOWEVER!!!
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+%=====================================%
+
+%=====================================%
+
+\begin{frame}
+	\frametitle{Using the Invariant Distribution}
+	\begin{itemize}
+		\item if $\pi_{\tilde{r}}$ is is the invariant state distribution of transition matrix $P_{\mu_{\tilde{r}}}$ \footnote{$\pi$ is an invarient of P if $\pi^T P = \pi^T$}
+		\[
+			(1-\alpha)\pi_{\tilde{r}}^T(J_{\mu \tilde{r}} - J^*) \leq 2\alpha \min\limits_{r \in \Re^K}\norm{J^* - \Phi r}_{\infty}
+		\]
+		\item Compare it with:
+		\[
+			(1-\alpha)\norm{J_{\mu \tilde{r}} - J^*}_{\infty} \leq \frac{4\alpha}{1-\alpha}\min\limits_{r \in \Re^K}\norm{J^* - \Phi r}_{\infty}
+		\]
+		\item Weighting Euclidean Norm projection by the invariant distribution of a greedy (or $\epsilon$-greedy) policy improves the performance loss.
+	\end{itemize}
+\end{frame}
+%=====================================%
+
+%=====================================%
+
+\begin{frame}
+	\begin{center}
+		\Huge Thank You!
+	\end{center}
+\end{frame}
+%=====================================%
+
+
+% %=====================================%
+
+% \begin{frame}
+% 	\frametitle{Background}
+% 	\begin{itemize}
+
+% 	\end{itemize}
+% \end{frame}
+% %=====================================%
+
+
+
+%=====================================%
+
+% \begin{frame}
+% 	\begin{center}
+% 		\Huge Thank You!
+% 	\end{center}
+% \end{frame}
+%=====================================%
+
+% \begin{frame}
+	% \frametitle{Background}
+% 	\begin{itemize}
+% 		\item 
+% 	\end{itemize}
+% \end{frame}
+
+
+\end{document}

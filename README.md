@@ -1,4 +1,4 @@
-# Reinforcement Learning Notes
+# rl_notes
 All notes related to Reinforcement Learning projects and MDPs are stored here. 
 
 # Table of contents

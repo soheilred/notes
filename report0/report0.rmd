@@ -3,7 +3,7 @@ title: "Report 0"
 author: "Soheil"
 date: "July 3, 2018"
 output:
-  pdf_document:
+  html_document:
         toc: true
 ---
 

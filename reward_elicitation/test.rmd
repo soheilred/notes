@@ -1,0 +1,14 @@
+---
+title: "Report 0"
+author: "Soheil"
+date: "July 3, 2018"
+output:
+  html_document:
+        toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is to test $OI = \frac{D_{mean}} {{A}}$ and $$ OI = \frac{D_{mean}} {{A}} $$

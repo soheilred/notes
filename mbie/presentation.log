@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.18)  7 NOV 2018 05:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  6 DEC 2018 10:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1152,14 +1152,20 @@ Package pdftex.def Info: multiarmedbandit.jpg  used on input line 102.
 
 ] [5
 
-] [6
+]
+Overfull \vbox (1.32523pt too high) detected at line 163
+ []
+
+[6
 
 ] [7
 
 ] [8
 
+] [9
+
 ]
-Overfull \hbox (10.48863pt too wide) detected at line 228
+Overfull \hbox (10.48863pt too wide) detected at line 238
  []$[]  \OML/cmm/m/it/10.95 Q[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s; a\OT1
 /cmr/m/n/10.95 ) = [](\OML/cmm/m/it/10.95 s; a\OT1/cmr/m/n/10.95 ) + \OML/cmm/m
 /it/10.95 ^^M [] []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s[]\OMS/cmsy/m/n/10.
@@ -1167,9 +1173,9 @@ Overfull \hbox (10.48863pt too wide) detected at line 228
  a[]\OT1/cmr/m/n/10.95 ) + []$ []  
  []
 
-[9
+[10
 
-] [10
+] [11
 
 ]
 \tf@nav=\write6
@@ -1181,19 +1187,19 @@ Overfull \hbox (10.48863pt too wide) detected at line 228
 \tf@snm=\write8
 \openout8 = `presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 258.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 258.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 268.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 268.
  (./presentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 258.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 258.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 268.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 268.
 Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 31953 strings out of 494880
- 776552 string characters out of 6179600
- 943587 words of memory out of 5000000
- 34627 multiletter control sequences out of 15000+600000
+ 31957 strings out of 494880
+ 776587 string characters out of 6179600
+ 943588 words of memory out of 5000000
+ 34629 multiletter control sequences out of 15000+600000
  14422 words of font info for 56 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  62i,11n,96p,779b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1215,10 +1221,10 @@ ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/symbols/msam10.pfb>
-Output written on presentation.pdf (10 pages, 210285 bytes).
+Output written on presentation.pdf (11 pages, 212288 bytes).
 PDF statistics:
- 153 PDF objects out of 1000 (max. 8388607)
- 113 compressed objects within 2 object streams
- 21 named destinations out of 1000 (max. 500000)
+ 158 PDF objects out of 1000 (max. 8388607)
+ 117 compressed objects within 2 object streams
+ 23 named destinations out of 1000 (max. 500000)
  48 words of extra memory for PDF output out of 10000 (max. 10000000)
 

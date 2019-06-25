@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+
+\bibitem{howard:dp}
+R.~A. Howard.
+\newblock {\em Dynamic Programming and Markov Processes}.
+\newblock MIT Press, Cambridge, MA, 1960.
+
+\bibitem{Lagoudakis2004}
+Michail~G. Lagoudakis and Ronald Parr.
+\newblock {Least-squares policy iteration}.
+\newblock {\em Journal of Machine Learning Research}, 4(6):1107--1149, 2004.
+
+\bibitem{Sutton1988}
+Richard~S. Sutton.
+\newblock Learning to predict by the methods of temporal differences.
+\newblock {\em Machine Learning}, 3(1):9--44, Aug 1988.
+
+\bibitem{Sutton:1998}
+Richard~S. Sutton and Andrew~G. Barto.
+\newblock {\em Introduction to Reinforcement Learning}.
+\newblock MIT Press, Cambridge, MA, USA, 1st edition, 1998.
+
+\end{thebibliography}
