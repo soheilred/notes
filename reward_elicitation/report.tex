@@ -34,6 +34,7 @@
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{enumerate}
+\usepackage{mathtools}
 %===================================
 
 \title{Reward Elicitation}
@@ -149,11 +150,11 @@ $$
 The term $\min_r r^\top  u$ is independent of the constraints, since the variable that we are minimizing over is $r$, and the constraint is not a function of $r$.
 
 $$
-  \begin{matrix}
+  \begin{matrix*}[l]
     \max \limits_u & \min \limits_{r} r^\top u \\
     A^\top u = \alpha  & \\
     u \geq 0
-  \end{matrix}
+  \end{matrix*}
 $$
 
 This minimization problem, misses a crucial element; the bound over $r$ (it'll go to $-\infty$ if $r$ is not bounded). $r$ can either be bounded by a set of limited feasible values such as $B=\{r_1, r_2,...r_l\}$. Or, it can be considered to be bounded by a set of linear constraints $Cr \leq d$, where $C$ is an $l \times nm$ matrix, where $l$ is the number of constraints on $r$. Both approaches are studied as follows.
@@ -184,12 +185,12 @@ Where $\beta = [\beta_1, \beta_2, ..., \beta_l]^\top$. The dual form of this pro
 \]
 And the maximin problem becomes
 \[
-  \begin{matrix}
+  \begin{matrix*}[l]
     \max_{t,u} t & \\
      & t < r_i^\top u \quad \forall i \leq l\\
-     & A^\top  u = \alpha \\
+     & A^\top  u = \alpha^\top \\
      & u \geq 0 \\
-  \end{matrix}
+  \end{matrix*}
 \]
 
 
