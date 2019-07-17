@@ -1,0 +1,15 @@
+\begin{thebibliography}{1}
+
+\bibitem{Chow2015}
+Yinlam Chow, Aviv Tamar, Shie Mannor, and Marco Pavone.
+\newblock {Risk-Sensitive and Robust Decision-Making: a CVaR Optimization
+  Approach}.
+\newblock pages 1--21, jun 2015.
+
+\bibitem{DeepakRamachandran2007}
+{Deepak Ramachandran} and {Eyal Amir}.
+\newblock {Bayesian Inverse Reinforcement Learning}.
+\newblock {\em IJCAI International Joint Conference on Artificial
+  Intelligence}, 10(5):2586--2591, 2007.
+
+\end{thebibliography}

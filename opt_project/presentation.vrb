@@ -1,0 +1,31 @@
+\frametitle{Value Function Optimization Using LP}
+	Example:
+	\begin{columns}
+
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\centering
+				\includegraphics[scale=.4]{exmpl.png}
+			\end{figure}
+		\end{column}
+
+		\begin{column}{0.5\textwidth}
+
+			\begin{lstlisting}[language=bash]
+				Solved in 0 iterations and 0.23 seconds
+				Optimal objective  3.707317073e+02
+
+				Reward: 370.732
+				u[0] 1.46341
+				u[1] 18.5366
+				u[2] 0
+				u[3] 0
+				u[4] 0
+				u[5] 0
+			\end{lstlisting}
+		\end{column}
+
+	\end{columns}
+
+
+

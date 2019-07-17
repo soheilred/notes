@@ -1,0 +1,468 @@
+\documentclass{article}
+%\documentclass{IEEETran}
+
+%\usepackage{anysize}
+%\usepackage[left=1.9cm,right=1.9cm,top=2.54cm,bottom=1.9cm]{geometry}
+%\usepackage{sectsty}
+%\sectionfont{\normalsize \bf}
+%\subsectionfont{\normalsize \bf}
+
+%\IEEEoverridecommandlockouts  
+%\overrideIEEEmargins
+
+%\usepackage{siunitx}
+\usepackage{setspace} 
+%\doublespacing
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\theoremstyle{remark}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{remark}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{property}{Property}
+\theoremstyle{remark}
+\newtheorem{definition}{Definition}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[bottom]{footmisc}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{mathtools}
+%===================================
+
+\newcommand{\valatrisk}[2]{\operatorname{VaR}_{#1}(#2)}
+\newcommand{\cvalatrisk}[2]{\operatorname{CVaR}_{#1}(#2)}
+%===================================
+
+\title{Reward Elicitation}
+
+\makeatletter
+\let\@fnsymbol\@arabic
+\makeatother
+\author{Soheil}
+\date{}
+\begin{document}
+\maketitle
+\section*{Introduction}
+
+\begin{itemize}
+  \item Inverse Reinforcement Learning and Apprenticeship Learning
+  \item Bayesian IRL
+  \item Risk in RL
+\end{itemize}
+
+
+
+\section*{Background}
+
+\begin{itemize}
+  \item MDP definition
+  \item $<S, A, P, R, \gamma>$
+  \item policy
+  \item value function
+  \item linear representation of reward function
+  \item $\mu$ (expected feature counts)
+
+  \item $D$: demonstrations
+  \item Bayesian IRL
+  \item applying Bayes theory
+
+\end{itemize}
+
+\subsection*{Markov Decision Processes}
+
+\subsection*{Bayesian IRL}
+Inverse Reinforcement Learning (IRL) is the problem of finding a reward function that can represent the intention of an expert who has provided the MDP with demonstrations. In Bayesian IRL this problem is solved with Bayesian probability approach. The goal in Bayesian IRL is to find the posterior probability over the reward function\cite{DeepakRamachandran2007}.
+
+
+
+In BIRL we assume that the policy is stationary, and each sample is in fact independent of the previous one. 
+\[
+  \Pr(D|R) = \prod_{(s,a) \in D} \Pr((s,a)|R) 
+\]
+
+In addition, we model the likelihood of the expert being at $(s,a)$ in terms of an exponential distribution function of $Q^*$. This exponential function is called softmax.
+
+\[
+  \Pr((s,a)|\mathbf{R}) = \frac{1}{Z} e^{cQ^*(s, a, \mathbf{R})}
+\]
+
+Therefore
+
+\[
+\begin{matrix*}[l]
+  \Pr(D|\mathbf{R}) & = & \prod_{(s,a) \in D} \frac{e^{cQ^*(s, a, \mathbf{R})}}{\sum_{a' \in \mathcal{A}}{e^{cQ^*(s, a', \mathbf{R})}}} \\
+   & = & \frac{1}{Z} e^{c E(D,\mathbf{R})}
+\end{matrix*}
+\]
+where $E(D, \mathbf{R}) = \sum_i Q^*(s_i, a_i, \mathbf{R})$
+
+Now, by applying the Bayes rule we can compute the posterior probability of reward function
+
+\[
+\begin{matrix*}[l]
+
+\Pr(\mathbf{R}|D) & = & \frac{\Pr(D|\mathbf{R})\Pr(\mathbf{R})}{\Pr(D)} \\
+& = & \frac{1}{Z'} e^{c E(D, \mathbf{R})} \Pr(\mathbf{R})
+\end{matrix*}
+\]
+
+$Z'$ is a normalizing factor. Computing $Z'$ is not an easy task. However, we can address this problem using sampling algorithms that can deal with the ratio of the densities at two points instead of the absolute value of the density at a point.
+
+\subsection*{Priors}
+
+We have different options for priors; we can use a uniform distribution over space $[R_{min}, R_{max}]$. Some MDPs have parsimonious reward function, with sparse reward structure. In these situations Gaussian and Laplacian prior should work better. In some situations where we are planning to reach to a goal, a Beta distribution can be used.
+
+\section*{Robust Optimization for MDPs}
+
+\begin{itemize}
+  \item V@R and CV@R
+  \item CV@R motivation
+  \item Robust MDP
+  \item LP representation
+\end{itemize}
+
+Let $X$ be a random variable, and the cumulative distribution function of X is defined as $F(x) = \Pr (X \leq x)$. The \textit{value-at-risk} (VaR) at $\alpha \in (0,1)$ confidence level is the $1-\alpha$ quantile of $X$
+
+\[
+  \valatrisk{\alpha}{X} = \min\{t | \Pr (X \leq x) \leq t\}
+\]
+$\valatrisk{\alpha}{X}$ cannot fully representing the real worst case scenario, which might happen somewhere at the end of a long tail, since it neglects the long tails with low probabilities. In addition, $\valatrisk{\alpha}{X}$ is not a convex function. In order to fix these problems, the \textit{average value-at-risk} and \textit{conditional value-at-risk} were introduced.
+
+
+The \textit{conditional value-at-risk} at confidence level $\alpha \in (0,1)$ is defined as:
+
+\[
+  \cvalatrisk{\alpha}{X} = \min_t \{ t + \frac{1}{\alpha} \mathbb{E}[(X-t)^-] \}
+\]
+
+where $(x)^- = -\max(-x, 0)$ is the negative part of $x$. This definition is true for both non-atomic and atomic probability distribution. However, in case of non-atomic distributions, we can simplify the formulation to
+
+\[
+  \cvalatrisk{\alpha}{X} = \mathbb{E}[X | X < \valatrisk{\alpha}{X}]
+\]
+
+This representation, unlike the previous one, is not coherent. The dual of the coherent representation can be formulated in terms of linear programs as:
+
+\[
+\begin{matrix*}[l]
+  \max_{t,y} & t+ \frac{1}{\alpha} p^\top y \\
+  s.t. & y \leq X - t \\
+   & y \leq 0
+\end{matrix*}
+\]
+
+\subsection*{Robust MDP}
+% fix the problem with interchangeable $\pi$ and u
+
+Let $\rho(\pi, r) = r^\top u$ denote the total discounted return for the MDP $M$. When we are looking for an optimal policy, we simply maximize the return over all policies ($\max_\pi \rho(\pi, r)$). But, we are dealing with an uncertain reward function, the first choice is to find the best worst-case scenario ($\max_\pi \min_r \rho(\pi, r)$). The best worst-case can be a good baseline, but, it is too conservative. A less conservative alternative can be $\cvalatrisk{\alpha}{X}$. So, the risk-sensitive discounted-return problem we are solving is\cite{Chow2015}:
+\[
+  \max\limits_{\pi \in \Pi} \quad \cvalatrisk{\alpha}{\rho(\pi, r)}
+\]
+
+Adding the $\cvalatrisk{\alpha}{X}$ guarantees the robustness, and at the same time it avoids the worst case, which might have a very small chance to happen.
+
+Using the $\cvalatrisk{\alpha}{\rho(\pi, r)}$ term with it's dual representation, and expand the linear program to have
+
+\[
+\begin{matrix*}[l]
+  \max\limits_{u \in \Pi} & \max\limits_{t,y} & t+ \frac{1}{\alpha} p^\top y \\
+   & s.t. & y \leq \mathbf{r}^\top u - t \quad \mathbf{r} \sim P(\mathbf{R}|D) \\
+   & & y \leq 0
+\end{matrix*}
+\]
+
+
+% $$
+%   \begin{matrix}
+  
+%     \min_v \alpha^\top  v \\
+%     s.t. \quad A v \geq r
+%   \end{matrix}
+% $$
+
+% In which $A_{nm*n} = E_{nm*n} - P_{nm*n}$, and $E_{nm*n}$ is a matrix consist of $m$ identity matrices of $n*n$ that is repeated $m$ times vertically. Note that the constraints has $n*m$ inequality.
+
+% The dual of this minimization is:
+
+% $$
+%   \begin{matrix}
+  
+%     \max_u r^\top  u \\
+%     s.t. \quad A^\top  u = \alpha \\
+%     u \geq 0
+%   \end{matrix}
+% $$
+
+% In robust optimization we have two agents, one is trying to maximize the return, while the other one is minimizing it. This is how the best worst case scenario is picked. Applying the same idea to this problem we'll have
+
+% $$
+%   \begin{matrix}
+  
+%     \min_r \max_u r^\top  u \\
+%     s.t. \quad A^\top  u = \alpha \\
+%     u \geq 0
+%   \end{matrix}
+% $$
+
+% By strong duality we know that we can swap $\min$ and $\max$.
+
+% $$
+%   \begin{matrix}
+%     \max_u \min_r r^\top  u \\
+%     s.t. \quad A^\top  u = \alpha \\
+%     u \geq 0
+%   \end{matrix}
+% $$
+
+% The term $\min_r r^\top  u$ is independent of the constraints, since the variable that we are minimizing over is $r$, and the constraint is not a function of $r$.
+
+% $$
+%   \begin{matrix*}[l]
+%     \max \limits_u & \min \limits_{r} r^\top u \\
+%     A^\top u = \alpha  & \\
+%     u \geq 0
+%   \end{matrix*}
+% $$
+
+% This minimization problem, misses a crucial element; the bound over $r$ (it'll go to $-\infty$ if $r$ is not bounded). $r$ can either be bounded by a set of limited feasible values such as $B=\{r_1, r_2,...r_l\}$. Or, it can be considered to be bounded by a set of linear constraints $Cr \leq d$, where $C$ is an $l \times nm$ matrix, where $l$ is the number of constraints on $r$. Both approaches are studied as follows.
+
+
+% \subsection*{$B$ as a Set}
+
+% Given $r \in B=\{r_1, r_2,...r_l\}$, we can reformulate the minimization as
+
+% $$
+%   \begin{matrix}
+%     \min_r r^\top u  &=& \min \sum_{k = 1}^{k=l} \beta_k r_k^\top u\\
+%     r \in \{r_1,...,r_l\} & & \sum_{k = 1}^{k=l} \beta_k = 1\\
+%       & & \beta_k \geq 0 \\
+%       & & \\
+%       & = &\max \beta r^\top u \\
+%       & & 1^\top \beta = 1 \\
+%       & & \beta \geq 0
+%   \end{matrix}
+% $$
+
+% Where $\beta = [\beta_1, \beta_2, ..., \beta_l]^\top$. The dual form of this problem is
+% \[
+%   \begin{matrix}
+%     \max_t t & \\
+%      & t < r_i^\top u \quad \forall i \leq l
+%   \end{matrix}
+% \]
+% And the maximin problem becomes
+% \[
+%   \begin{matrix*}[l]
+%     \max_{t,u} t & \\
+%      & t < r_i^\top u \quad \forall i \leq l\\
+%      & A^\top  u = \alpha^\top \\
+%      & u \geq 0 \\
+%   \end{matrix*}
+% \]
+
+
+% \subsection*{$B$ as a Polytope}
+
+% The constraints can also be induced to the system using a set of linear inequalities. So, to solve the inner minimization problem we have:
+
+% $$
+%     \begin{matrix}
+%         \min_r r^\top  u  &= \min_r r^\top  u  & = \min_r r^\top  u \\
+%         r \in B & Cr \leq d & -Cr \geq -d
+%     \end{matrix}
+% $$
+
+% The dual of this problem is
+
+% $$
+%   \begin{matrix}
+%     \max_t -d^\top t \\
+%     s.t. \quad -C^\top t = u \\
+%     t \geq 0
+%   \end{matrix}
+% $$
+
+% So, for the robust MDPs we have
+
+% $$
+%   \begin{matrix}
+%     \max_{u,t} -d^\top t \\
+%     s.t. \quad A^\top  u = \alpha \\
+%     u \geq 0 \\
+%     -C^\top t = u \\
+%     t \geq 0
+%   \end{matrix}
+% $$
+
+
+% \section*{Miscellaneous Notes}
+
+% \subsection*{Minimax Regret for Imprecise MDPs}
+
+
+% We know that $r \in \mathcal{R}$, where $\mathcal{R}$ is the feasible set for rewards, which reflects the current knowledge of the reward.
+
+
+% $$
+%   \begin{matrix}
+%     R(f,r) = \max_{g \in \mathcal{F}} r.g - r.f \\
+%     MR(f,\mathcal{R}) = \max_{r \in \mathcal{R}} R(f,r) \\
+%     MMR(\mathcal{R}) = \min_{f \in \mathcal{F}} MR(f, \mathcal{R})
+%   \end{matrix}
+% $$
+
+% $R(f,r)$ is the regret of policy f (as represented by its visitation frequencies) relative to reward function $r$: it is simply the loss or difference in value between f and the optimal policy under $r$. $MR(f,R)$ is the maximum regret of $f$ w.r.t. feasible reward set $\mathcal{R}$. Should we chose a policy with visitation frequencies $f$, $MR(f,R)$ represents the worst-case loss over all possible realizations of the reward function; i.e., the regret incurred in the presence of an adversary who chooses the $r$ from $\mathcal{R}$ to maximize our loss. Finally, in the presence of such an adversary, we wish to minimize this max regret: $MMR(R)$ is the minimax regret of feasible reward set $\mathcal{R}$. This can be viewed as a game between a decision maker choosing $f$ who wants to minimize loss relative to the optimal policy, and an adversary who chooses a reward to maximize this loss given the decision maker’s choice of policy. Any $f^*$ that minimizes max regret is a minimax optimal policy, while the $r$ that maximizes its regret is the witness or adversarial reward function, and the optimal policy $g$ for $r$ is the witness or adversarial policy.
+
+
+
+% \subsection*{Inverse Reinforcement Learning} 
+
+% The problem of extracting a reward function using an observation that is made from the optimal policy \cite{alg_for_irl_Ng}. The optimal policy is usually coming from an expert demonstration.
+
+% \subsection*{Implementation Considerations}
+
+% In order to implement a robust MDP solver on the Invasive Species problem, we need to have the followings: 
+% Matrix $A$, which depends on $P_{s'}(s,a)$ (the model of the system), vector $\alpha$, and either set $B$, or matrix $C$ and vector $d$, which are the set of constraint on the reward.
+
+
+% However, in Invasive Species project, we are dealing with a large state space. We cannot represent $P_{s'}(s,a)$ in a tabular format. In such cases, it's impossible for the solver to obtain the optimal policy, unless we replace the tabular representations in the problem with an approximation, and in particular, a linear approximation.
+
+% Based on \cite{DeFarias2003}, we can formulate an approximate MDP solver as a Linear Program. The formulation looks very similar to the robust MDP solver, but, without the constraints on the reward function.
+
+
+% So, I believe if I can formulate an ALP, and solve the invasive species problem with that, given the current reward function, then I would be able to incorporate the reward elicitation part into the problem, and solve the problem as a whole.
+
+% One issue that we come across in ALPs is dealing with high number of samples. We are looking for the best possible way to pick a set of sample that best represent the state-space. (this part needs to be more studied from the Van Roy's paper)
+
+
+% \subsection*{Separation Oracles}
+
+% An algorithm that outputs TRUE if a given point (inside the ellipsoid $E_k$) is actually inside the set $P:\{x|Ax \leq b\}$ (feasible set). And if not, it returns a half space (the separator plan or a hyperplane $(w,c) s.t. \quad w.y \leq c \quad \forall y \in P$) that the set P is on it.
+
+% \subsection*{Ellipsoid method}
+
+% It's an alternative solution to an LP. It's slower than simplex in practice. The algorithm considers an ellipsoid in each iteration, and checks if the center of the ellipsoid 
+
+
+
+\section*{Questions}
+
+
+
+\bibliographystyle{plain}
+\bibliography{invasive_species}
+\end{document}
+
+
+%===============================
+%========== NOT TO RUN =========
+\iffalse
+
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}   % The style of the section title
+  {}                             % a prefix
+  {0pt}                          % How much space exists between the prefix and the title
+  {Section \thesection:\quad}    % How the section is represented
+
+% Starred variant
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}
+  {}
+  {0pt}
+  {}
+  
+
+asdasd \cite{1013341}. Fig.~\ref{Fig_Example}.
+
+{\fontfamily{pcr}\selectfont 
+run files}
+
+\begin{enumerate}
+  \item The labels consists of sequential numbers.
+  \item The numbers starts at 1 with every call to the enumerate environment.
+\end{enumerate}
+
+\begin{itemize}
+
+\end{itemize}
+
+======== HYPERLINK =============
+Find the \texttt{run files} for all variants in \href{https://github.com/SHi-ON/InfoRet/tree/master/results/Assignment_4}{here}
+
+
+====== FIGURES ========
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=.40]{Fig_Example.pdf}
+	\caption{Example.}
+	\label{Fig_Example}
+\end{figure}
+
+\input{second}
+
+========= EQUATIONS =============
+
+\begin{equation}
+\left\|\frac{\partial V}{\partial\mathbf{x}_1}\right\|\left\|\mathbf{x}_1\right\|\leq c_1V\quad \text{for}\; \left\|\mathbf{x}_1\right\|\geq c_2
+\end{equation}
+
+
+============ TABLES =============
+
+\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+\hline
+\multicolumn{3}{|c|}{Country List} \\
+\hline
+Country Name     or Area Name& ISO ALPHA 2 Code &ISO ALPHA 3 \\
+\hline
+Afghanistan & AF &AFG \\
+Aland Islands & AX   & ALA \\
+Albania &AL & ALB \\
+Algeria    &DZ & DZA \\
+American Samoa & AS & ASM \\
+Andorra & AD & AND   \\
+Angola & AO & AGO \\
+\hline
+\end{tabular}
+
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ cell1 & cell2 & cell3 \\ 
+ cell4 & cell5 & cell6 \\ 
+ cell7 & cell8 & cell9 \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+
+
+
+\begin{lstlisting}[language=Python, caption=Code's name]
+import numpy as np
+ 
+def incmatrix(genl1,genl2):
+    m = len(genl1)
+    n = len(genl2)
+    M = None #to become the incidence matrix
+    VT = np.zeros((n*m,1), int)  #dummy variable
+\end{lstlisting}
+
+
+
+\begin{verbatim}
+Put your codes here!
+\end{verbatim}
+\fi
