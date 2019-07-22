@@ -154,30 +154,62 @@ This representation, unlike the previous one, is not coherent. The dual of the c
 \[
 \begin{matrix*}[l]
   \max_{t,y} & t+ \frac{1}{\alpha} p^\top y \\
-  s.t. & y \leq X - t \\
+  s.t. & y \leq X - \mathbf{1}t\\
    & y \leq 0
 \end{matrix*}
 \]
 
 \subsection*{Robust MDP}
-% fix the problem with interchangeable $\pi$ and u
+% fix the problem with interchangeable $u$ and u
 
-Let $\rho(\pi, r) = r^\top u$ denote the total discounted return for the MDP $M$. When we are looking for an optimal policy, we simply maximize the return over all policies ($\max_\pi \rho(\pi, r)$). But, we are dealing with an uncertain reward function, the first choice is to find the best worst-case scenario ($\max_\pi \min_r \rho(\pi, r)$). The best worst-case can be a good baseline, but, it is too conservative. A less conservative alternative can be $\cvalatrisk{\alpha}{X}$. So, the risk-sensitive discounted-return problem we are solving is\cite{Chow2015}:
-\[
-  \max\limits_{\pi \in \Pi} \quad \cvalatrisk{\alpha}{\rho(\pi, r)}
-\]
-
-Adding the $\cvalatrisk{\alpha}{X}$ guarantees the robustness, and at the same time it avoids the worst case, which might have a very small chance to happen.
-
-Using the $\cvalatrisk{\alpha}{\rho(\pi, r)}$ term with it's dual representation, and expand the linear program to have
+Let $\rho(u, r) = r^\top u$ denote the total discounted return for the MDP $M$. When we are looking for an optimal policy, we simply maximize the return over all policies:
 
 \[
 \begin{matrix*}[l]
-  \max\limits_{u \in \Pi} & \max\limits_{t,y} & t+ \frac{1}{\alpha} p^\top y \\
-   & s.t. & y \leq \mathbf{r}^\top u - t \quad \mathbf{r} \sim P(\mathbf{R}|D) \\
-   & & y \leq 0
+\max_\mathbf{u} & \mathbf{r}^\top \mathbf{u} \\
+   & \mathbf{A}^\top \mathbf{u} = \mathbf{\alpha}^\top \\
+   & \mathbf{u} \geq 0
+\end{matrix*} 
+\]
+But, we are dealing with an uncertain reward function. In this situation, we are usually interested into figuring out how good we can do in the worst-case scenario. This leads to an adversarial situation, where one agent is trying to maximize the return, and the advisory is doing the opposite by minimizing the return.
+
+\[
+\begin{matrix*}[l]
+\max_\mathbf{u} \min_\mathbf{r} & \mathbf{r}^\top \mathbf{u} \\
+   & \mathbf{A}^\top \mathbf{u} = \mathbf{\alpha}^\top \\
+   & \mathbf{u} \geq 0
+\end{matrix*} 
+\]
+  
+
+
+
+The best worst-case can be a good baseline, but it is too conservative. A less conservative alternative can be $\cvalatrisk{\alpha}{X}$. So, the risk-sensitive discounted-return problem we are solving can be represented by\cite{Chow2015}:
+
+
+
+\[
+\begin{matrix*}[l]
+\max_u & \cvalatrisk{\alpha}{\rho(u, r)} \\
+   & A^\top u = \alpha^\top \\
+   & u \geq 0
+\end{matrix*} 
+\]
+
+Adding the $\cvalatrisk{\alpha}{X}$ guarantees the robustness, and at the same time it avoids the worst-case, which might be very unlikely to happen.
+
+Using the $\cvalatrisk{\alpha}{\rho(u, r)}$ term with it's dual representation, we can expand the linear program and have
+
+\[
+\begin{matrix*}[l]
+  \max\limits_{u,t,y} & t+ \frac{1}{\alpha} p^\top y \\
+   s.t. & y \leq \mathbf{R}^\top u - \mathbf{1}t  \\
+   & y \leq 0 \\
+   & \mathbf{A}^\top \mathbf{u} = \mathbf{\alpha}^\top \\
+   & \mathbf{u} \geq 0
 \end{matrix*}
 \]
+where $\mathbf{R}$ is a matrix consist of column vectors $[\mathbf{r_1, r_2,..., r_k}]$ , and $\mathbf{r_i} \sim P(\mathbf{R}|D)$, which means $\mathbf{r}$ is drawn from the posterior probability distribution over reward function.
 
 
 % $$
